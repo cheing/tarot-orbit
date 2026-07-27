@@ -1,0 +1,9 @@
+# Secrets
+.env
+
+# Design reference material (not used by the app at runtime)
+design/
+
+# Unreferenced stray images
+Gemini_Generated_Image_kfvlzrkfvlzrkfvl.png
+magnific_the-image-displays-a-coll_2993321704.jpeg

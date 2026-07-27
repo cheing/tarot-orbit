@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <title>Tarot Orbit | 星环塔罗</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quintessential&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  </head>
+  <body>
+    <main class="app" id="app">
+      <section class="intro" id="intro" aria-labelledby="intro-title">
+        <div class="intro-stars" aria-hidden="true"></div>
+        <div class="intro-zodiac" aria-hidden="true"></div>
+        <div class="intro-planet intro-planet-left" aria-hidden="true"></div>
+        <div class="intro-planet intro-planet-right" aria-hidden="true"></div>
+        <div class="intro-card-deco intro-card-left" aria-hidden="true"></div>
+        <div class="intro-card-deco intro-card-right" aria-hidden="true"></div>
+        <div class="intro-orbit-mark" aria-hidden="true">☾</div>
+        <div class="intro-inner">
+          <div class="intro-crown" aria-hidden="true">
+            <span></span><span></span><i></i><span></span><span></span>
+          </div>
+          <div class="title-wrap">
+            <span class="title-moon">☾</span>
+            <h1 id="intro-title">星环塔罗</h1>
+            <span class="title-moon">☽</span>
+          </div>
+          <p class="intro-subtitle">TAROT ORBIT</p>
+          <p class="intro-copy">
+            ✦ 写下你的问题，让三张牌从星环中 ✦<br />回应此刻的方向
+          </p>
+          <label class="question-label" for="questionInput">你的问题</label>
+          <textarea
+            id="questionInput"
+            maxlength="120"
+            rows="3"
+            placeholder="例如：我接下来应该如何面对这段关系？"></textarea>
+          <button class="primary-btn" id="startBtn" type="button">
+            开始占卜
+          </button>
+          <p class="intro-note">♧ 可使用摄像头手势，或点击按钮开始占卜</p>
+        </div>
+      </section>
+
+      <section class="orbit-scene" id="orbitScene" aria-label="星环塔罗抽牌">
+        <div class="space-bg" aria-hidden="true">
+          <div class="star-layer star-a"></div>
+          <div class="star-layer star-b"></div>
+          <div class="nebula nebula-a"></div>
+          <div class="nebula nebula-b"></div>
+        </div>
+
+        <header class="top-bar">
+          <div>
+            <p class="eyebrow">Past · Present · Future</p>
+            <h2>选择三张牌</h2>
+          </div>
+          <div class="status-pill" id="gestureStatus">拖动星环或开启手势</div>
+        </header>
+
+        <section class="chosen-strip" aria-label="已选择的塔罗牌">
+          <div class="slot" data-slot="0">过去</div>
+          <div class="slot" data-slot="1">现在</div>
+          <div class="slot" data-slot="2">未来</div>
+        </section>
+
+        <section class="result-stage" id="resultStage" aria-live="polite">
+          <div class="result-title-block">
+            <p class="eyebrow">The Reading</p>
+            <h2>三牌启示</h2>
+            <p id="questionEcho"></p>
+          </div>
+          <div class="final-cards" id="finalCards"></div>
+          <article class="reading-panel" id="readingPanel">
+            <div class="reading-head">
+              <span>AI 解读</span>
+              <button class="ghost-btn" id="retryReadingBtn" type="button">
+                重新解读
+              </button>
+            </div>
+            <div class="reading-loading" id="readingLoading">
+              <span></span>
+              <p>正在聆听牌面的低语...</p>
+            </div>
+            <div class="reading-content" id="readingContent"></div>
+            <div class="reading-error" id="readingError"></div>
+          </article>
+          <button class="primary-btn restart-btn" id="restartBtn" type="button">
+            再占一次
+          </button>
+        </section>
+
+        <section class="orbit-wrap" id="orbitWrap" aria-label="可旋转塔罗牌环">
+          <div class="orbit-halo" aria-hidden="true"></div>
+          <div class="card-orbit" id="cardOrbit"></div>
+        </section>
+
+        <div class="wheel-wrap" id="wheelWrap" aria-hidden="true">
+          <div class="wheel-glow"></div>
+          <div class="wheel">
+            <span></span><span></span><span></span><span></span> <i></i><i></i
+            ><i></i><i></i>
+          </div>
+        </div>
+
+        <aside class="camera-panel" id="cameraPanel" aria-label="手势识别预览">
+          <video id="gestureVideo" playsinline autoplay muted></video>
+          <canvas id="gestureCanvas" width="220" height="160"></canvas>
+        </aside>
+      </section>
+    </main>
+
+    <script src="assets/js/cards.js"></script>
+    <script src="assets/js/gesture.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
