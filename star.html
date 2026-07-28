@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS 3D 星球</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #0b0b1a;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      /* 宇宙背景微光 */
+      .universe {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* 星球主体容器 */
+      .planet-container {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        /* 模拟3D空间倾斜 */
+        transform: rotateZ(20deg);
+        box-shadow:
+          inset -30px -30px 50px rgba(0, 0, 0, 0.8),
+          0 0 50px rgba(77, 159, 255, 0.4); /* 大气层发光 */
+        overflow: hidden;
+      }
+
+      /* 星球表面纹理与阴影 */
+      .planet-surface {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        background: linear-gradient(90deg, #1a2a6c, #b21f1f, #fdbb2d, #1a2a6c);
+        background-size: 200% 100%;
+        animation: rotatePlanet 15s linear infinite;
+      }
+
+      /* 星球云层/陆地阴影遮罩 */
+      .planet-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        box-shadow: inset 20px 20px 40px rgba(255, 255, 255, 0.1);
+      }
+
+      /* 星球光环 */
+      .ring {
+        position: absolute;
+        width: 360px;
+        height: 120px;
+        border: 8px solid rgba(200, 200, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: transparent;
+        border-bottom-color: rgba(255, 255, 255, 0.8);
+        transform: rotateX(75deg);
+        box-shadow: 0 0 20px rgba(100, 150, 255, 0.5);
+        pointer-events: none;
+      }
+
+      /* 动画：星球表面滚动旋转 */
+      @keyframes rotatePlanet {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="universe">
+      <!-- 星球光环（背面部分可以通过多层结构优化，这里采用整体视觉呈现） -->
+      <div class="ring"></div>
+
+      <!-- 星球 -->
+      <div class="planet-container">
+        <div class="planet-surface"></div>
+        <div class="planet-overlay"></div>
+      </div>
+    </div>
+  </body>
+</html>
